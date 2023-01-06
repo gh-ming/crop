@@ -28,9 +28,9 @@ def find_all(string, sub):
         pos.append(start)
         start += len(sub)
 
-# root, out_path = process_arguments(sys.argv)
-root = r'D:\桌面\科研项目\农业项目\data_anhui\成果\2020_3_21_anhui'
-out_path = r'D:\桌面\科研项目\农业项目\data_anhui\成果\2020_3_21_anhui\xml'
+root, out_path = process_arguments(sys.argv)
+# root = r'D:\桌面\科研项目\农业项目\data_anhui\成果\2020_3_21_anhui'
+# out_path = r'D:\桌面\科研项目\农业项目\data_anhui\成果\2020_3_21_anhui\xml'
 check_path(out_path)
 if os.path.isfile(root):
     file_list = []
