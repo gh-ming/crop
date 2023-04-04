@@ -44,5 +44,5 @@ def rename_txt(path):
 
 
 if __name__ == '__main__':
-    path = r"D:\桌面\科研项目\农业项目\data_anhui\2020_12_3"
+    path = r"D:\桌面\科研项目\毕业设计\new_data4"
     rename_txt(path)

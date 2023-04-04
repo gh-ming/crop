@@ -19,8 +19,8 @@ def process_arguments(argv):
 
 
 # root, out_path = process_arguments(sys.argv)
-root = r'D:\桌面\科研项目\农业项目\data_anhui\多余\2021_3'
-out_path = r'D:\桌面\科研项目\农业项目\data_anhui\多余\2021_3\jp2'
+root = r'G:'
+out_path = r'G:\Sentinel\jilin_main2022\B1_tif'
 check_path(out_path)
 if os.path.isfile(root):
     file_list = []
