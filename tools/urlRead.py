@@ -36,6 +36,17 @@ def rename_txt(path):
             file_url.write(str(i)+'\n')  #\n为换行符
         file_url.close()
 
+def generate_urls_and_write_to_file(base_url, years, file_path):
+    result = []
+    for year in years:
+        url = base_url.replace('A', str(year))
+        result.append(url)
+    with open(file_path, 'w') as f:
+        for url in result:
+            f.write(url + '\n')
+
+
+
 
 
 
@@ -44,5 +55,9 @@ def rename_txt(path):
 
 
 if __name__ == '__main__':
-    path = r"D:\桌面\科研项目\毕业设计\new_data4"
-    rename_txt(path)
+    # path = "G:/download/1/"
+    # rename_txt(path)
+    base_url = "https://zenodo.org/records/4417810/files/CLCD_v01_A.tif?download=1"
+    years = range(1985, 2020)
+    file_path = r"G:\download\2024_环境与灾害遥感上机\作业内容\环境与灾害遥感上机实验_2024\urls.txt"
+    generate_urls_and_write_to_file(base_url, years, file_path)

@@ -79,33 +79,33 @@ def mosaic_float(file_list, out_path):
 def run():
     folder_path, out_path= process_arguments(sys.argv)
     file_list = os.listdir(folder_path)
-    zip_list = []
-    for filename in file_list:
-        filepath = os.path.join(folder_path,filename)
-        # if not zipfile.is_zipfile(filepath):
-        #     continue
-        zip_list.append(filename)
-    name_list = []
-    for zipname in tqdm(zip_list):
-        name,extension = os.path.splitext(zipname)
-        os.makedirs(os.path.join(folder_path,name),exist_ok=True)
-        prefix_list = zipname.split("_")
-        filepath = os.path.join(folder_path,zipname)
-        if os.path.exists(os.path.join(out_path,"{}_processing.txt".format(name))):
-            continue
-        try:
-            with open(os.path.join(out_path,"{}_processing.txt".format(name)), 'w') as f:
-                f.write('processing')
-                f.close()
-            if os.path.exists(filepath):
-                zf = zipfile.ZipFile(filepath,'r')
-                for zipped in zf.namelist():
-                    zf.extract(zipped,os.path.join(folder_path,name))
-            name_list.append(name)
-        except BaseException:
-            print("{} is a bad zip file /n".format(zipname))
-            continue
-    print('all zipped files have benn extracted')
+    # zip_list = []
+    # for filename in file_list:
+    #     filepath = os.path.join(folder_path,filename)
+    #     # if not zipfile.is_zipfile(filepath):
+    #     #     continue
+    #     zip_list.append(filename)
+    # name_list = []
+    # for zipname in tqdm(zip_list):
+    #     name,extension = os.path.splitext(zipname)
+    #     os.makedirs(os.path.join(folder_path,name),exist_ok=True)
+    #     prefix_list = zipname.split("_")
+    #     filepath = os.path.join(folder_path,zipname)
+    #     if os.path.exists(os.path.join(out_path,"{}_processing.txt".format(name))):
+    #         continue
+    #     try:
+    #         with open(os.path.join(out_path,"{}_processing.txt".format(name)), 'w') as f:
+    #             f.write('processing')
+    #             f.close()
+    #         if os.path.exists(filepath):
+    #             zf = zipfile.ZipFile(filepath,'r')
+    #             for zipped in zf.namelist():
+    #                 zf.extract(zipped,os.path.join(folder_path,name))
+    #         name_list.append(name)
+    #     except BaseException:
+    #         print("{} is a bad zip file /n".format(zipname))
+    #         continue
+    # print('all zipped files have benn extracted')
     folder_list = generate_folderlist(folder_path)
     for folder in tqdm(folder_list):
         if folder.split('/')[-1] not in name_list:
@@ -129,7 +129,6 @@ def run():
 
             del dst_ds
         else:
-            print('tvdi')
             mosaic_float(file_list, out_name)
             img, geo = yimage.io.read_image(out_name, with_geo_info=True)
             img[img>1] = 1
@@ -149,8 +148,8 @@ def process_arguments(argv):
     #     help()
     # src_path=argv[0]
     # dst_path=argv[1]
-    src_path=r'D:\桌面\科研项目\农业项目\henan_各种指数\test'
-    dst_path=r'D:\桌面\科研项目\农业项目\henan_各种指数\test'
+    src_path=r'D:\桌面\科研项目\农业项目\2024河南冬小麦分类\第二版结果'
+    dst_path=r'D:\桌面\科研项目\农业项目\2024河南冬小麦分类\第二版结果'
     return src_path, dst_path
 
 def help():

@@ -6,12 +6,12 @@ import pandas as pd
 api = SentinelAPI('xp10-101', '123456aatxy', 'https://scihub.copernicus.eu/dhus')
 
 # search by polygon, time, and SciHub query keywords
-footprint = geojson_to_wkt(read_geojson('jalol.geojson'))
+footprint = geojson_to_wkt(read_geojson('D:/桌面/科研项目/农业项目/crop_code/tools/jalol.geojson'))
 products = api.query(footprint,
-                     date=(date(2022, 8, 1), date(2022, 8, 30)),  # 1.10
+                     date=(date(2023, 8, 14), date(2023, 8, 20)),  # 1.10
                      producttype='S2MSI2A',
                      platformname='Sentinel-2',
-                     cloudcoverpercentage=(0, 20))
+                     cloudcoverpercentage=(0, 10))
 api.to_dataframe(products).to_csv('data.csv')
 # data = pd.read_csv('yingzhou_20220701_20220731_cloud_10_S2A.csv')
 # name_list = []

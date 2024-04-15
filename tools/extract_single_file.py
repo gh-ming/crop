@@ -19,8 +19,8 @@ def process_arguments(argv):
 
 
 # root, out_path = process_arguments(sys.argv)
-root = r'G:'
-out_path = r'G:\Sentinel\jilin_main2022\B1_tif'
+root = r'G:/data/OData/henan/'
+out_path = r'G:/data/OData/henan/B1'
 check_path(out_path)
 if os.path.isfile(root):
     file_list = []
@@ -52,21 +52,21 @@ for zipname in zip_list:
         if os.path.exists(filepath):
             zf = zipfile.ZipFile(filepath, 'r')
             for zipped in zf.namelist():
-                if 'R60m' in zipped:
+                if 'R10m' in zipped:
                     zf.extract(zipped, out_path)
     except BaseException:
         print("{} is a bad zip file \n".format(zipname))
         zip_id = zip_id - 1
         continue
-    mid_folder = os.listdir(os.path.join(out_path, "{}.SAFE/GRANULE".format(name)))[0]
+    mid_folder = os.listdir(os.path.join(out_path, "{}/GRANULE".format(name)))[0]
     image = os.path.join(out_path,
-                         "{}.SAFE/GRANULE/{}/IMG_DATA/R60m/{}_{}_B{}_{}0m.jp2".format(name, mid_folder,
+                         "{}/GRANULE/{}/IMG_DATA/R10m/{}_{}_B{}_{}0m.jp2".format(name, mid_folder,
                                                                                       prefix_list[5],
                                                                                       prefix_list[2],
-                                                                                      '01',
-                                                                                      6))
-    out_image = os.path.join(out_path, '{}_B1.jp2'.format(name))
+                                                                                      '02',
+                                                                                      1))
+    out_image = os.path.join(out_path, '{}_B2.jp2'.format(name))
     shutil.move(image, out_image)
-    extracted_path = os.path.join(out_path, "{}.SAFE".format(name))
+    extracted_path = os.path.join(out_path, "{}".format(name))
     shutil.rmtree(extracted_path)
     zip_id = zip_id - 1
