@@ -30,20 +30,20 @@ def check_path(pathname):
 #基础设置
 ############################################################################
 # 1 起始日期(包含起始)
-startDate='2024-03-28'
-endDate  ='2024-04-09'
+startDate='2024-04-10'
+endDate  ='2024-04-23'
 
 # 2 所需卫星数据
-satellite='SENTINEL-1'
+satellite='SENTINEL-2'
 
 # 3 检索时文件名需包括的字符串  对于哨兵2 可以用来筛选区块或者产品等级
-contains_str='GRD'
+contains_str='L2A'
 
 # 4 检索区域 可在该网站绘制geojson文件 https://geojson.io/#map=5.12/34.13/122.8
-roi_geojson='G:/data/OData/henan.geojson'
+roi_geojson='G:/data/OData/map.geojson'
 
 # 5 数据保存路径
-output_dir='G:/data/OData/henan_20240328_20240409/'
+output_dir='G:/data/OData/henan_20240410_20240423/'
 check_path(output_dir)
 
 # 6 新版哥白尼数据中心账号密码 即这个网站的账号密码 https://dataspace.copernicus.eu/
@@ -156,7 +156,8 @@ for i in tqdm(range(len(data_id_list))):
         wget_str.append(command)
         try:
             print('[',datetime.datetime.strftime(datetime.datetime.now(),'%H:%M:%S'),'] '+'开始下载: '+data_name_list[i])
-            subprocess.run(command, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            # subprocess.run(command, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            subprocess.run(command, shell=True, check=True)
             with open(file_name, "w") as file:  
                 file.write('file downloaded successfully.')
             print('[',datetime.datetime.strftime(datetime.datetime.now(),'%H:%M:%S'),'] '+'下载成功: '+data_name_list[i])
@@ -170,7 +171,7 @@ if downloaded_false:
     file_false = f"{output_dir}downloadfalse.txt"
     with open(file_false,"w") as f:
         f.truncate(0)
-        f.write("Files that have not been downloaded：")
+        f.write("Files that have not been downloaded：\n")
         f.write(downloaded_false)   
 else:   
     print("All files downloaded successfully.")
